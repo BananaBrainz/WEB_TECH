@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="shortcut icon" href="https://habrastorage.org/getpro/moikrug/uploads/company/100/004/343/9/logo/medium_e5c2e11ebd34bfad91451c5d618f39eb.png" type="image/png">
+<title>Товары</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" type="text/css" href="style.css" />
+<script type="text/javascript" src="js/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="js/jquery.cycle.all.min.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+</head>
+<body>
+<div id="wrapper">
+  <div align="center" id="header">
+      <h1><a href="otz.html">К отзывам</a></h1>
+    <div class="logo">
+        <a href="#"><img width="650" height="200" src="avito.jpg" alt="">
+      <h1>ЛЕГКО КУПИТЬ | ЛЕГКО ПРОДАТЬ</h1></a>
+    </div>
+  </div>
+  <div id="content">
+    <div class="recent">
+        <a href="#">Каталог</a>-<a href="#">Электроника</a>-<a href="#">Телефоны и смартфоны</a>-<a href="#">Айфоны</a>
+    </div>
+    <div align="center" wight="100%">
+	<input type="button" id="getUser" value="Показать еще"/>
+	</div>
+  </div>
+</div>
+</body>
+</html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $('#getUser').on('click',function(){
+		var tek = $('.post').length+1;
+		var kol = 5;
+        $.ajax({
+            type:'POST',
+            url:'getData.php',
+            dataType: "json",
+            data:{tek:tek, kol:kol},
+            success:function(data){
+			    for (var i=0;i<5;i++){
+					$('.recent').append('<div class="post"> <a href="#"><img src="'+data[i].imagesource+
+						'" width="100" height="100" alt="" /></a><h2><a href="#">'+data[i].headline+
+						'</a></h2><p>'+data[i].maintext+
+						'</p><p class="readmore"> <a href="#">Посмотреть описание</a> </p><div class="break"></div></div>');
+			    }
+            }
+        });
+    });
+	$('#getUser').click();
+});
+</script>
